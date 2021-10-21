@@ -1,3 +1,7 @@
 <?php
-    phpinfo();
+
+// ez a phpinfó
+
+phpinfo();
+
 ?>

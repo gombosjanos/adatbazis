@@ -1,9 +1,7 @@
 <?php
 
-require "../db.inc.php";
-
-class Ulesrend
-{
+class Ulesrend {
+    
     private $id;
     private $nev;
     private $sor;
@@ -11,69 +9,45 @@ class Ulesrend
     private $jelszo;
     private $felhasznalonev;
 
-
-
-
-    public function set_user($id, $conn)
-    {
-        //adatbázisból lekérdezzük
+    public function set_user($id, $conn) {
+        // adatbázisból lekérdezzük
         $sql = "SELECT id, nev, sor, oszlop, jelszo, felhasznalonev FROM ulesrend";
-        $sql .= " WHERE id = $id";
+        $sql .= " WHERE id = $id ";
         $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $this->id = $row['id'];
-            $this->nev = $row['nev'];
-            $this->sor = $row['sor'];
-            $this->oszlop = $row['oszlop'];
-            $this->jelszo = $row['jelszo'];
-            $this->felhasznalonev = $row['felhasznalonev'];
+        if ($conn->query($sql)) {
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $this->id = $row['id'];
+                $this->nev = $row['nev'];
+                $this->sor = $row['sor'];
+                $this->oszlop = $row['oszlop'];
+                $this->jelszo = $row['jelszo'];
+                $this->felhasznalonev = $row['felhasznalonev'];
+            }
         } 
-
-      
-    } //set_user
-
-    public function get_user($id, $conn)
-    {
-        //adatbázisból lekérdezzük
-        $sql = "SELECT id, nev, sor, oszlop, jelszo, felhasznalonev FROM ulesrend";
-        $sql .= " WHERE id = $id";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $this->id = $row['id'];
-            $this->nev = $row['nev'];
-            $this->sor = $row['sor'];
-            $this->oszlop = $row['oszlop'];
-            $this->jelszo = $row['jelszo'];
-            $this->felhasznalonev = $row['felhasznalonev'];
-            return $row;
-        } else {
-            return FALSE;
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
         }
-
-        //visszaadjuk 
-    }//get_user
-
-
-    public function get_username(){
-        
-        return $this->nev;
-
     }
 
+    // építsük fel az összes get metódust
+    public function get_nev() {
+        return $this->nev;
+    }
 
+    public function get_jelszo() {
+        return $this->jelszo;
+    }
 
+    public function get_felhasznalonev() {
+        return $this->felhasznalonev;
+    }
+}
 
+// $tanulo = new Ulesrend;
 
-}//class
+// $tanulo->set_user(4, $conn);
 
-$tanulo = new Ulesrend;
-$tanulo -> set_user(4, $conn);
-
-echo  $tanulo -> get_username();
-
+// echo $tanulo->get_nev();
 
 ?>

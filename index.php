@@ -1,22 +1,16 @@
 <?php
 
 session_start();
-$title="Főoldal";
+
+$title = "Főoldal";
 include 'htmlheader.inc.php';
 
+?>
+<body
+><?php
+
+include 'menu.inc.php';
 
 ?>
-
-
-
-<body>
-    <?php
-
-        
-        include 'menu.inc.php';
-
-    ?>
-    <h2>Hello PHP</h2>
+        <h1>Hello PHP</h1>
 </body>
-
-</html>
