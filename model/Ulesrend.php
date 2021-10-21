@@ -65,7 +65,7 @@ class Ulesrend {
         }
         return $lista;
     }
-
+    }
 
     
 }
