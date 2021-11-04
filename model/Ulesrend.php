@@ -42,32 +42,32 @@ class Ulesrend {
     public function get_felhasznalonev() {
         return $this->felhasznalonev;
     }
+
     public function get_sor() {
         return $this->sor;
     }
+
     public function get_oszlop() {
         return $this->oszlop;
     }
+
     public function get_id() {
         return $this->id;
     }
 
-    //a tanulók id listáját adja vissza
-
+    // tanulók id listáját adja vissza
     public function tanulokListaja($conn) {
-       $lista= array();
+        $lista = array();
         $sql = "SELECT id FROM ulesrend";
-        if( $result = $conn->query($sql)){
+        if($result = $conn->query($sql)) {
             if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					$lista[] = $row['id'];
-					}
+                    $lista[] = $row['id'];
+                }
+            }
         }
         return $lista;
     }
-    }
-
-    
 }
 
 // $tanulo = new Ulesrend;
