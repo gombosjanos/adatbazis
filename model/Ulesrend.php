@@ -68,8 +68,6 @@ class Ulesrend {
         }
         return $lista;
     }
-
-    
 }
 
 // $tanulo = new Ulesrend;
