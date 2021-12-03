@@ -25,14 +25,8 @@ if (isset($_FILES["fileToUpload"])) {
 }
 
 
-              echo '<img src= "profilkep/".$_FILES["fileToUpload"]["name"]>';
-
-
-
+echo '<img src="upload/'.$file_name.' "/>';
 ?>
-
-
-
 <table>
 	<tr>
 		<th colspan="1.5">
@@ -51,7 +45,7 @@ if (isset($_FILES["fileToUpload"])) {
 			?>
 			<form action="index.php?page=ulesrend" method="post" enctype="multipart/form-data">
 				Válasszon ki egy képet profilképnek:
-				<input type="file" name="fileToUpload" id="fileToUpload"><br>
+				<input type="file" name="fileToUpload[]" id="fileToUpload"><br>
 				<input type="submit" value="Feltöltés" name="upload">
 			</form>
 			<br>
@@ -106,10 +100,7 @@ if (isset($_FILES["fileToUpload"])) {
 			else {
 				$plusz = '';
 				if (in_array($row, $hianyzok)) $plusz .=  ' class="missing"';
-				if ($row == $en) {
-					$plusz .=  ' id="me"';
-					echo '<img src= "profilkep/".$img>';
-				}
+				if ($row == $en) $plusz .=  ' id="me"';
 				if ($row == $tanar) $plusz .=  ' colspan="2"';
 				echo "<td" . $plusz . ">" . $tanulo->get_nev();
 				if (!empty($_SESSION["id"])) {
