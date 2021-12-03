@@ -1,4 +1,5 @@
 <?php
+
 $i = 0;
 $errors = array();
 
@@ -24,74 +25,12 @@ if (isset($_FILES["fileToUpload"])) {
 }
 
 
-function tanulokListaja($conn)
-{
-	$lista = array();
-	$sql = "SELECT id FROM ulesrend";
-	if ($result = $conn->query($sql)) {
-		if ($result->num_rows > 0) {
-			while ($row = $result->fetch_assoc()) {
-				$lista[] = $row['id'];
-			}
-		}
-	}
-	return $lista;
-}
+              echo '<img src= "profilkep/".$_FILES["fileToUpload"]["name"]>';
+
 
 
 ?>
-<?php
 
-class Felhaszprofkep {
-    
-    private $id;
-    protected $tablaNev;
-
-    public function set_id($id, $conn) {
-        // adatbázisból lekérdezzük
-        $sql = "SELECT id FROM $this->tablaNev WHERE id = $id ";
-        $result = $conn->query($sql);
-        if ($conn->query($sql)) {
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $this->id = $row['id'];
-            }
-            else {
-                $sql = "INSERT INTO $this->tablaNev VALUES($id) ";
-                if($result = $conn->query($sql)) {
-                    $this->id = $id;
-                }
-                else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
-            }
-        } 
-        else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-
-    // építsük fel az összes get metódust
-    public function get_id() {
-        return $this->id;
-    }
-
-    // id listát ad vissza
-    public function lista($conn) {
-        $lista = array();
-        $sql = "SELECT id FROM $this->tablaNev";
-        if($result = $conn->query($sql)) {
-            if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-                    $lista[] = $row['id'];
-                }
-            }
-        }
-        return $lista;
-    }
-}
-
-?>
 
 
 <table>
@@ -99,10 +38,8 @@ class Felhaszprofkep {
 		<th colspan="1.5">
 			<h2>Ülésrend</h2>
 		</th>
-		<th colspan="3>
-
+		<th colspan="3">
 			<?php
-
 			if ($i > 0) echo "$i fájl feltöltve";
 			if ($errors) {
 				foreach ($errors as $error) {
@@ -111,34 +48,14 @@ class Felhaszprofkep {
 					}
 				}
 			}
-
 			?>
 			<form action="index.php?page=ulesrend" method="post" enctype="multipart/form-data">
 				Válasszon ki egy képet profilképnek:
-				<input type="file" name="fileToUpload[]" id="fileToUpload"><br>
-				<input type="submit" value="Feltöltés" name="profilkep">
+				<input type="file" name="fileToUpload" id="fileToUpload"><br>
+				<input type="submit" value="Feltöltés" name="upload">
 			</form>
 			<br>
-			<form action="index.php?page=ulesrend" method="post">
-				Kié lesz a profilkép? <select name="profkep_id">
-					<?php
-
-
-					
-
-
-					if ($tanuloIdk) {
-						foreach ($tanuloIdk as $row) {
-							$tanulo->set_user($row, $conn);
-							if ($tanulo->get_nev()) echo '<option value="' . $row . '">' . $tanulo->get_nev() . '</option>';
-						}
-					}
-					?>
-
-				</select>-é
-
-			</form>
-
+			
 		</th>
 
 
@@ -189,7 +106,10 @@ class Felhaszprofkep {
 			else {
 				$plusz = '';
 				if (in_array($row, $hianyzok)) $plusz .=  ' class="missing"';
-				if ($row == $en) $plusz .=  ' id="me"';
+				if ($row == $en) {
+					$plusz .=  ' id="me"';
+					echo '<img src= "profilkep/".$img>';
+				}
 				if ($row == $tanar) $plusz .=  ' colspan="2"';
 				echo "<td" . $plusz . ">" . $tanulo->get_nev();
 				if (!empty($_SESSION["id"])) {
