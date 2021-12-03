@@ -23,9 +23,19 @@ if (isset($_FILES["fileToUpload"])) {
 		}
 	}
 }
+if(isset($_POST['submit']))
+{ 
+$filepath = "profilkep/" . $_FILES["fileToUpload"]["name"];
 
-
-echo '<img src="upload/'.$file_name.' "/>';
+if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $filepath)) 
+{
+echo "<img src=".$filepath." height=200 width=300 />";
+} 
+else 
+{
+echo "Error !!";
+}
+} 
 ?>
 <table>
 	<tr>
