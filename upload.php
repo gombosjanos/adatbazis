@@ -3,7 +3,7 @@
   $errors = array();
 
 if(isset($_FILES["fileToUpload"])) {
-  $target_dir = "uploads/";
+  $target_dir = "profilkep/";
   $allowed_filetypes = array('image/png', 'image/jpg','image/jpeg');
 
   foreach($_FILES["fileToUpload"]["name"] as $key => $name) {
@@ -31,28 +31,3 @@ if(isset($_FILES["fileToUpload"])) {
   }
 }
 ?>
-<!DOCTYPE html>
-<html>
-<body>
-<?php
-
-if($i > 0) echo "$i fájl feltöltve";
-if($errors) {
-  foreach ($errors as $error) {
-    foreach ($error as $errorMsg) {
-      echo "$errorMsg <br>";
-    }
-  }
-}
-
-?>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-  Select image to upload:
-  <input type="file" name="fileToUpload[]" id="fileToUpload" multiple>
-  <input type="submit" value="Upload Image" name="submit">
-</form>
-
-</body>
-</html>
-</body>
-</html>
