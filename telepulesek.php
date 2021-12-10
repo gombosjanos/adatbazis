@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Települések</title>	
+    <link rel="stylesheet" type="text/css" href="css/telepules.css">
+
+</head>
+<body>
+
 <?php
 $servername = "localhost";
 $username = "Jani";
@@ -33,3 +43,5 @@ echo "</table>";
 
 mysqli_close($conn);
 ?>
+</body>
+</html>
